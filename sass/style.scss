@@ -1,0 +1,333 @@
+$primary: rgb(217, 1, 14);
+$secondary: rgb(226, 6, 18);
+$skin: rgb(242, 156, 121);
+$hair: rgb(102, 59, 25);
+$pumpkinColor: rgb(255, 146, 27);
+
+@mixin headRadius {
+	border-top-left-radius: 50% 60%;
+	border-top-right-radius: 50% 60%;
+	border-bottom-left-radius: 50% 40%;
+	border-bottom-right-radius: 50% 40%;
+}
+
+@mixin makeCenter($j, $i, $d) {
+	display: flex;
+	justify-content: $j;
+	align-items: $i;
+	flex-direction: $d;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	width: 100%;
+	height: 100vh;	
+	@include makeCenter(center, center, row);
+	overflow-y: hidden;
+}
+
+.container {
+	width: 260px;
+	height: 420px;
+	// background: grey;
+}
+
+.devil-container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+
+	.horns {
+		position: absolute;
+		width: 160px;
+		height: 120px;
+		background: $primary;
+		border-top-left-radius: 50% 40%;
+		border-top-right-radius: 50% 40%;
+		border-bottom-left-radius: 50% 60%;
+		border-bottom-right-radius: 50% 60%;
+
+		&::before {
+			content: '';
+			position: absolute;
+			background: white;
+			width: 120px;
+			height: 70px;
+			border-radius: 50%;
+			left: 50%;
+			top: -10px;
+			transform: translateX(-50%);
+		}
+	}
+
+	.head {
+		width: 160px;
+		height: 160px;
+		background: $primary;
+		position: absolute;
+		@include makeCenter(center, center, row);
+		z-index: 1;
+		top: 20px;
+		@include headRadius;
+
+
+		.main {
+			width: 120px;
+			height: 120px;
+			@include headRadius;
+			background: $skin;
+			overflow: hidden;
+			position: relative;
+
+			.hair1,
+			.hair2 {
+				width: 100px;
+				height: 30px;
+				background: $hair;
+				border-radius: 50%;
+				position: absolute;
+			}
+
+			.hair1 {
+				transform: rotateZ(-20deg);
+				
+				&::before {
+					content: '';
+					position: absolute;
+					width: 20px;
+					height: 50px;
+					background: $hair;
+					border-radius: 50%;
+					left: 60px;
+					transform: rotateZ(60deg);
+				}
+			}
+			.hair2 {
+				transform: rotateZ(20deg);
+				left: 60px;
+			}
+
+			.eyes {
+				width: 80px;
+				height: 20px;
+				position: absolute;
+				top: 50px;
+				left: 20px;
+				@include makeCenter(space-between, center, row);
+
+				.e1,
+				.e2 {
+					width: 15px;
+					height: 20px;
+					border-top: 3px solid $hair;
+					border-radius: 100%;
+				}
+			}
+
+			.nose {
+				width: 15px;
+				height: 10px;
+				position: absolute;
+				border: 1px solid rgb(195, 131, 87);
+				border-radius: 18px;
+				border-right-color: transparent;
+				border-top-color: transparent;
+				top: 70px;
+				left: 55px;
+				transform: rotateZ(20deg);
+			}
+
+			.mouth {
+				width: 50px;
+				position: absolute;
+				top: 60px;
+				left: 37px;
+				border-bottom: 20px solid white;
+				border-top: 30px solid transparent;
+				border-radius: 100%;
+			}
+		}
+	}
+
+	.body {
+		height: 70%;
+		width: 55%;
+		background: $primary;
+		border-radius: 50%;
+		position: relative;
+		top: 30%;
+
+		&::before {
+			content: '';
+			position: absolute;
+			width: 70px;
+			height: 60px;
+			background: white;
+			top: 80%;
+			border-top-left-radius: 28px;
+			border-top-right-radius: 28px;
+			left: calc(50% - 35px);
+			z-index: 1;
+		}
+
+		.wear {
+			width: 65%;
+			height: 70%;
+			background: $secondary;
+			position: absolute;
+			top: 20px;
+			left: 17.5%;
+			border-bottom-left-radius: 34px;
+			border-bottom-right-radius: 34px;
+			@include makeCenter(flex-start, center, column);
+
+			.button {
+				width: 10px;
+				height: 10px;
+				background: $primary;
+				margin-top: 15px;
+				border-radius: 50%;
+
+				&:nth-child(1) {
+					margin-top: 50px;
+				}
+			}
+		}
+		.left-hand,
+		.right-hand {
+			position: absolute;
+			width: 180px;
+			height: 10px;
+			z-index: -1;
+			border-top: 40px solid $primary;
+			border-bottom: 40px solid transparent;
+			border-radius: 50%;
+
+			&::before {
+				content: '';
+				position: absolute;
+				width: 180px;
+				height: 10px;
+				border-top: 40px solid white;
+				border-bottom: 40px solid transparent;
+				border-radius: 50%;
+				transform: rotateZ(10deg);
+			}
+		}
+		.left-hand {
+			top: 75px;
+			left: -80px;
+			transform: rotateZ(-60deg);
+
+			&::before {
+				top: -10px;
+				left: -7px;
+			}
+
+			.palm {
+				position: absolute;
+				width: 12px;
+				height: 12px;
+				background: $skin;
+				left: -1px;
+				top: -10px;
+				transform: rotateZ(-40deg);
+				border-bottom-left-radius: 12px;
+				border-top-left-radius: 12px;
+			}
+		}
+		.right-hand {
+			left: 80px;
+			transform: rotateZ(190deg);
+
+			&::before {
+				transform: rotateZ(5deg);
+				top: -10px;
+				left: -20px;
+			}
+			
+			.palm {
+				position: absolute;
+				width: 11px;
+				height: 11px;
+				background: $skin;
+				left: -3px;
+				top: -8px;
+				transform: rotateZ(-45deg);
+				border-bottom-left-radius: 12px;
+				border-top-left-radius: 12px;
+			}
+		}
+	}
+
+	.legs { 
+		width: 35%;
+		height: 3%;
+		background: $primary;
+		position: absolute;
+		bottom: 10px;
+		left: 10%;
+		border-radius: 50%;
+	}
+}
+
+.fork {
+	position: relative;
+	width: 5px;
+	height: 80%;
+	background: $primary;
+	top: -90%;
+	left: 255px;
+
+	.edge {
+		width: 0;
+		height: 0;
+		position: absolute;
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		border-bottom: 40px solid $primary;
+	}
+
+	.top.edge {
+		left: -12.5px;
+		top: -30px;
+	}
+
+	.left-side,
+	.right-side {
+		width: 80px;
+		height: 80px;
+		position: absolute;
+		border-bottom: 10px solid $primary;
+		border-bottom-left-radius: 50%;
+		border-bottom-right-radius: 50%;	
+		top: 35px;
+	}
+	.left-side {
+		border-left: 5px solid $primary;
+		border-right: 5px solid transparent;
+		left: -60px;
+		transform: rotateZ(14deg);
+
+		& .edge {
+			top: -30px;
+			left: -17px;
+		}
+	}
+	.right-side {
+		border-left: 5px solid transparent;
+		border-right: 5px solid $primary;
+		left: -13px;
+		transform: rotateZ(-14deg);
+
+		& .edge {
+			left: 57px;
+			top: -30px;
+		}
+	}
+}
